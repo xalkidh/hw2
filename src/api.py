@@ -1,6 +1,9 @@
 from fastapi import FastAPI
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from src.agent import run_agent
+import asyncio
+import json
 
 app = FastAPI()
 
@@ -17,13 +20,23 @@ class ChatResponse(BaseModel):
 
 @app.post("/chat", response_model=ChatResponse)
 def chat(request: ChatRequest):
-    # Παίρνουμε το ιστορικό του session
     history = session_histories.get(request.session_id, [])
-    
-    # Τρέχουμε τον agent
     response, updated_history = run_agent(request.message, history)
-    
-    # Αποθηκεύουμε το ενημερωμένο ιστορικό
     session_histories[request.session_id] = updated_history
-    
     return ChatResponse(response=response)
+
+@app.post("/chat/stream")
+async def chat_stream(request: ChatRequest):
+    history = session_histories.get(request.session_id, [])
+    response, updated_history = run_agent(request.message, history)
+    session_histories[request.session_id] = updated_history
+
+    async def generate():
+        # Στέλνουμε token-by-token με SSE format
+        for char in response:
+            data = json.dumps({"token": char})
+            yield f"data: {data}\n\n"
+            await asyncio.sleep(0.01)
+        yield "data: [DONE]\n\n"
+
+    return StreamingResponse(generate(), media_type="text/event-stream")
