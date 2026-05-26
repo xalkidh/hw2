@@ -7,7 +7,7 @@ from langchain_core.messages import HumanMessage, AIMessage
 from typing import TypedDict, Annotated
 import operator
 
-from src.tools import predict_dropout, retrieve_information
+from src.tools import predict_dropout, retrieve_information, dataset_statistics
 
 load_dotenv()
 
@@ -23,7 +23,7 @@ llm = ChatGoogleGenerativeAI(
 )
 
 # Σύνδεση tools με LLM
-tools = [predict_dropout, retrieve_information]
+tools = [predict_dropout, retrieve_information, dataset_statistics]
 llm_with_tools = llm.bind_tools(tools)
 
 # Node 1: ο agent αποφασίζει τι να κάνει

@@ -64,3 +64,31 @@ def retrieve_information(query: str) -> str:
     """
     from src.rag import retrieve
     return retrieve(query)
+
+@tool
+def dataset_statistics(column_name: str) -> str:
+    """
+    Returns summary statistics for a numerical column in the student dropout dataset.
+    Input: column name as a string (e.g. 'GPA', 'Attendance_Rate', 'Stress_Index', 'Study_Hours_per_Day', 'Age').
+    Use this when the user asks about average, median, min, max, or distribution of a specific feature.
+    """
+    try:
+        df = pd.read_csv("data/dataset.csv")
+        
+        if column_name not in df.columns:
+            available = [col for col in df.columns if df[col].dtype in ['float64', 'int64']]
+            return f"Column '{column_name}' not found. Available numerical columns: {', '.join(available)}"
+        
+        col = df[column_name]
+        dropout_mask = df["Dropout"] == 1
+        
+        stats = f"""Statistics for '{column_name}':
+- Overall: mean={col.mean():.2f}, median={col.median():.2f}, std={col.std():.2f}, min={col.min():.2f}, max={col.max():.2f}
+- Dropout students: mean={col[dropout_mask].mean():.2f}, median={col[dropout_mask].median():.2f}
+- Non-dropout students: mean={col[~dropout_mask].mean():.2f}, median={col[~dropout_mask].median():.2f}
+- Overall dropout rate in dataset: {dropout_mask.mean():.1%}"""
+        
+        return stats
+    
+    except Exception as e:
+        return f"Error: {str(e)}"
