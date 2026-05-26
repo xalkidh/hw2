@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_community.vectorstores import Chroma
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import TextLoader, DirectoryLoader
 
 load_dotenv()
@@ -11,14 +11,19 @@ DOCUMENTS_PATH = "data/documents"
 VECTOR_STORE_PATH = "data/vector_store"
 
 def build_vector_store():
-    loader = DirectoryLoader(DOCUMENTS_PATH, glob="*.txt", loader_cls=TextLoader)
+    loader = DirectoryLoader(
+    DOCUMENTS_PATH, 
+    glob="*.txt", 
+    loader_cls=TextLoader,
+    loader_kwargs={"encoding": "utf-8"}
+)
     documents = loader.load()
 
     splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
     chunks = splitter.split_documents(documents)
 
     embeddings = GoogleGenerativeAIEmbeddings(
-        model="models/embedding-001",
+        model="models/gemini-embedding-001",
         google_api_key=os.getenv("GOOGLE_API_KEY")
     )
 
@@ -33,7 +38,7 @@ def build_vector_store():
 
 def load_vector_store():
     embeddings = GoogleGenerativeAIEmbeddings(
-        model="models/embedding-001",
+        model="models/gemini-embedding-001",
         google_api_key=os.getenv("GOOGLE_API_KEY")
     )
 
