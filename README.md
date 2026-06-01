@@ -23,7 +23,7 @@ The agent is built with LangGraph and has access to three tools:
 | `predict_dropout` | Uses the HW1 Random Forest model to predict dropout probability for a given student profile |
 | `dataset_statistics` | Returns summary statistics for any numerical column in the HW1 dataset |
 
-As a bonus feature (Task 5), I chose to implement the *dataset_statistics* tool, as I considered it the most useful addition for the student dropout domain. This tool provides key insights into the dataset, helping users better understand the data distribution and the factors that may influence dropout predictions.
+As a bonus feature (Task 5), I chose to implement the **dataset_statistics** tool, as I considered it the most useful addition for the student dropout domain. This tool provides key insights into the dataset, helping users better understand the data distribution and the factors that may influence dropout predictions.
 
 ### LangGraph Graph Structure
 
