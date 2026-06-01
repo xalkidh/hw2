@@ -1,5 +1,6 @@
 # hw2
-A.I. Hands On - 2nd Assignment 
+A.I. Hands On - 2nd Assignment
+
 Subject: Conversational AI Agent for Student Dropout Prediction  
 Name: Archontia Chalkidi  
 ID: 09325028
