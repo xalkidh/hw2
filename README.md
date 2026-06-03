@@ -45,16 +45,16 @@ Eight documents were selected to cover the full spectrum of factors related to s
 
 The knowledge base consists of 8 documents stored in `data/documents/`:
 
-| File | Content |
-|------|---------|
-| `dropout_factors.txt` | Key factors associated with student dropout |
-| `dropout_factors2.txt` | Additional research on dropout risk factors |
-| `dropout_prevention.txt` | Strategies and programs for dropout prevention |
-| `reducing_dropout_rates.txt` | Institutional approaches to reducing dropout rates |
-| `stress_and_mental_health.txt` | Impact of stress and mental health on dropout |
-| `student_housing_and_dropouts.txt` | Relationship between student housing and dropout |
-| `student_retention.txt` | University retention strategies |
-| `wikipedia_dropping_out.txt` | Wikipedia overview of student dropout |
+| File | Content | Source |
+|------|---------|--------|
+| `dropout_factors.txt` | Key factors associated with student dropout | https://www.nature.com/articles/s41599-025-04698-y/tables/10 |
+| `dropout_factors2.txt` | Additional research on dropout risk factors | https://toknowpress.net/ISBN/978-961-6914-31-4/104.pdf |
+| `dropout_prevention.txt` | Strategies and programs for dropout prevention | https://www.expandinglearning.org/expandingminds/article/proven-solution-dropout-prevention-expanded-learning-opportunities |
+| `reducing_dropout_rates.txt` | Approaches to reducing dropout rates | https://riunet.upv.es/server/api/core/bitstreams/2d63098a-6701-483b-a6dc-d2fde3c88774/content |
+| `stress_and_mental_health.txt` | Impact of stress and mental health on dropout | https://www.researchgate.net/publication/377873074_Factors_Affecting_Student_Drop-Out_Behavior_A_Systematic_Review_Article_Info_ABSTRACT |
+| `student_housing_and_dropouts.txt` | Relationship between student housing and dropout | https://eva.dk/Media/638543977618694125/Bilag%20-%20English%20summary%20Student%20housing%20and%20dropout%20in%20higher%20education.pdf |
+| `student_retention.txt` | University retention strategies | https://www.researchgate.net/publication/318133592_Student_Retention_in_Higher_Education_A_Shared_Issue |
+| `wikipedia_dropping_out.txt` | Wikipedia overview of student dropout | https://en.wikipedia.org/wiki/Dropping_out |
 
 The RAG system can answer questions such as:
 - "What are the main factors that cause students to drop out?"
